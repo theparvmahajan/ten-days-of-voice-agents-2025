@@ -1,5 +1,16 @@
 # Day 1 – Get Your Starter Voice Agent Running
 
+
+## 🌟 Parv – Day 1 Completed (Murf AI Voice Agent Challenge 2025)
+
+- Successfully set up the backend and frontend
+- Able to start the voice agent locally
+- Tested voice → Gemini → Murf Falcon → playback loop
+- Everything is working 🎉
+
+Looking forward to Day 2!
+---
+
 For Day 1, your objective is to:
 
 - Step 1: Fork the repo (optional). **Get this starter repo running end-to-end** (backend + frontend) by following the setup and run instructions in `README.md`.

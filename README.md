@@ -1,3 +1,14 @@
+## 🌟 Parv – Day 1 Progress (Murf AI Voice Agent Challenge 2025)
+
+- Successfully set up the backend and frontend
+- Able to start the voice agent locally
+- Tested voice → Gemini → Murf Falcon → playback loop
+- Everything is working 🎉
+
+More updates will be pushed day by day.
+---
+
+
 # AI Voice Agents Challenge - Starter Repository
 
 Welcome to the **AI Voice Agents Challenge** by [murf.ai](https://murf.ai)!

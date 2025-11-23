@@ -5,7 +5,7 @@
 - Tested voice → Gemini → Murf Falcon → playback loop
 - Everything is working 🎉
 
-# 🌟 Day 2 — Coffee Shop Barista Agent
+## 🌟 Day 2 — Coffee Shop Barista Agent
 
 Day 2 goal: Convert the base voice agent into a **conversational barista** capable of taking a coffee order through voice.
 You can find Day-2 changes in the day-2 branch.

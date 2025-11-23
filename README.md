@@ -5,6 +5,30 @@
 - Tested voice → Gemini → Murf Falcon → playback loop
 - Everything is working 🎉
 
+## 🌟 Day 2 — Coffee Shop Barista Agent
+
+Day 2 goal: Convert the base voice agent into a **conversational barista** capable of taking a coffee order through voice.
+You can find Day-2 changes in the day-2 branch.
+
+## 🚀 What was added in Day 2
+
+### 🔹 Persona
+Friendly barista for **Nebula Coffee Co.**
+Warm, upbeat responses — feels like a real café experience.
+
+### 🔹 Order State Tracking
+The agent maintains the following structured order object:
+
+```json
+{
+  "drinkType": "string",
+  "size": "string",
+  "milk": "string",
+  "extras": ["string"],
+  "name": "string"
+}
+```
+
 More updates will be pushed day by day.
 ---
 

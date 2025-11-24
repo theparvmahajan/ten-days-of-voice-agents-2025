@@ -42,5 +42,34 @@
       "meditation or quiet breathing"
     ],
     "agent_summary": "You're feeling very happy and excited, and your goals for today are exercise, preparing for strength training, and mental training."
+  },
+  {
+    "timestamp": "2025-11-24T13:10:25.020443Z",
+    "mood": "elevated",
+    "energy": "a bit high",
+    "stressors": "none",
+    "objectives": [
+      "consistent progress on challenge",
+      "light exercise"
+    ],
+    "self_care": [
+      "light exercise"
+    ],
+    "agent_summary": "Today you're feeling elevated with a bit high energy. You're focusing on consistent progress with your challenge and getting some light exercise."
+  },
+  {
+    "timestamp": "2025-11-24T13:21:27.854930Z",
+    "mood": "really happy",
+    "energy": "really high",
+    "stressors": "none",
+    "objectives": [
+      "completing DSC journey",
+      "completing voice agent challenge",
+      "light exercise"
+    ],
+    "self_care": [
+      "light exercise"
+    ],
+    "agent_summary": "You're feeling really happy with high energy and no stressors today. Your main goals are to complete your DSC journey, finish the voice agent challenge, and do some light exercise."
   }
 ]

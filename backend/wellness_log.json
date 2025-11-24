@@ -1,0 +1,46 @@
+[
+  {
+    "timestamp": "2025-11-23T16:37:58.177724Z",
+    "mood": "normal",
+    "energy": "a little tired",
+    "stressors": "Daily tasks",
+    "objectives": [
+      "Complete day three task",
+      "Complete DSA video",
+      "Study data analytics"
+    ],
+    "self_care": [
+      "Have a cup of coffee"
+    ],
+    "agent_summary": "Feeling normal but a little tired. Goals are to complete day three task, finish DSA video, and study data analytics. Self-care is a cup of coffee."
+  },
+  {
+    "timestamp": "2025-11-23T16:40:52.500449Z",
+    "mood": "elevated but sick",
+    "energy": "low due to sickness",
+    "stressors": "sickness and cough",
+    "objectives": [
+      "rest and recover"
+    ],
+    "self_care": [
+      "rest"
+    ],
+    "agent_summary": "You're feeling a bit elevated after coffee but also sick with a cough, and you want to prioritize rest today."
+  },
+  {
+    "timestamp": "2025-11-23T16:44:10.575741Z",
+    "mood": "very happy, very good, very excited",
+    "energy": "high, very productive",
+    "stressors": "None",
+    "objectives": [
+      "exercise",
+      "prepare for strength training",
+      "mental training"
+    ],
+    "self_care": [
+      "light stretching or short walk",
+      "meditation or quiet breathing"
+    ],
+    "agent_summary": "You're feeling very happy and excited, and your goals for today are exercise, preparing for strength training, and mental training."
+  }
+]

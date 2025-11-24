@@ -20,7 +20,8 @@ from livekit.agents import (
 from livekit.plugins import murf, silero, google, deepgram, noise_cancellation
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
-from .order_state import OrderState, save_order_to_file
+from .wellness_log import append_entry, load_log, summarize_last_entry
+
 
 logger = logging.getLogger("agent")
 
@@ -29,138 +30,125 @@ load_dotenv(".env.local")
 
 class Assistant(Agent):
     def __init__(self) -> None:
-        brand_name = "Nebula Coffee Co."  # pick any brand name you like
+        # Load previous wellness history for this user (basic, file-based)
+        history = load_log(base_dir=Path(__file__).resolve().parent.parent)
+        last_summary = summarize_last_entry(history)
+
+        # Build history context text to inject into system prompt
+        if last_summary:
+            history_text = (
+                "Here is a brief summary of the last check-in for this user: "
+                + last_summary
+                + " Use this to compare how today feels versus last time, "
+                  "and reference it softly in conversation."
+            )
+        else:
+            history_text = (
+                "There is no previous check-in logged yet. Treat this as the first one."
+            )
 
         super().__init__(
             instructions=f"""
-You are a friendly, efficient barista at {brand_name}.
+You are a supportive, grounded health and wellness voice companion.
 
-The user is speaking to you via voice to place a coffee order.
-We are tracking the order in a JSON object with these exact keys:
+Your role:
+- Do brief daily check-ins about how the user is feeling and what they want to focus on.
+- You are NOT a therapist or doctor. You MUST NOT diagnose conditions or give medical advice.
+- If the user brings up serious distress or crisis, gently encourage them to seek support from a trusted person or professional.
 
-{{
-  "drinkType": "string",
-  "size": "string",
-  "milk": "string",
-  "extras": ["string"],
-  "name": "string"
-}}
+Conversation flow for each check-in:
+1. Ask about mood and energy in a natural way.
+   - Examples: "How are you feeling today?" "What’s your energy like?" "Anything stressing you out?"
+2. Ask about 1–3 intentions or objectives for today.
+   - Examples: "What are 1–3 things you’d like to get done today?"
+     "Is there anything you want to do for yourself — rest, exercise, hobbies?"
+3. Offer small, realistic suggestions or reflections.
+   - Examples: break big tasks into smaller steps, take short breaks,
+     consider a 5-minute walk or simple self-care.
+   - Keep advice very practical, non-medical, and non-diagnostic.
+4. Close with a recap:
+   - Briefly summarize mood/energy and the 1–3 main goals.
+   - Ask: "Does this sound right?" and adjust if needed.
 
-Your job:
-- Take ONE coffee order at a time.
-- Ask clear follow-up questions until all of these fields are filled.
-- Clarify anything ambiguous (e.g., "regular coffee" → ask about size and milk).
-- Extras can be toppings/modifiers like "extra shot", "caramel", "whipped cream", "no sugar" etc.
-- The name is the customer's name to write on the cup.
+Persistence:
+- When you have a clear sense of:
+  - mood
+  - energy
+  - key stressors (if any)
+  - main objectives (1–3)
+  - self-care ideas (if any)
+  and after you give your recap, CALL the `save_checkin` tool with those fields filled.
+- Do not call the tool too early; only after you reach the recap stage.
 
-Tool usage:
-- Whenever the customer mentions drink type, size, milk, extras, or name,
-  CALL the `update_order` tool with whatever fields you can fill.
-- When you are confident the order is complete, CALL the `finalize_order` tool.
-- After `finalize_order`, briefly summarize the full order to the customer.
+Context from previous check-ins:
+- {history_text}
 
-Conversation style:
-- Warm, upbeat, like a real barista.
-- Short, natural sentences.
-- Never mention JSON, tools, or internal functions to the customer.
+Style:
+- Calm, kind, encouraging, but realistic.
+- Keep responses concise and conversational.
+- Do not mention JSON, files, tools, or internal implementation details.
 """.strip(),
         )
 
-        # Simple per-session state for this agent
-        self.order_state = OrderState()
-        self._saved_once = False
-
-    # ---------------- TOOLS ---------------- #
+    # --------------- TOOLS --------------- #
 
     @function_tool()
-    async def update_order(
+    async def save_checkin(
         self,
         context: RunContext,
-        drinkType: Optional[str] = None,
-        size: Optional[str] = None,
-        milk: Optional[str] = None,
-        extras: Optional[List[str]] = None,
-        name: Optional[str] = None,
+        mood: str,
+        energy: str,
+        stressors: str,
+        objectives: List[str],
+        self_care: List[str],
+        recap_summary: str,
     ) -> dict[str, Any]:
         """
-        Update the current coffee order based on new information from the customer.
-        The LLM should call this whenever the user provides any part of their order.
+        Save the current day's wellness check-in to a JSON log.
+
+        The LLM should call this AFTER it has:
+        - asked about mood & energy
+        - explored current stressors (if any)
+        - collected 1–3 main objectives
+        - suggested at least one simple self-care idea (if applicable)
+        - given a brief recap to the user
+
+        Args:
+            mood: User's self-reported mood (short text, or simple scale like "3/5, okay but tired").
+            energy: User's self-reported energy level.
+            stressors: Short description of anything stressing the user.
+            objectives: 1–3 concrete goals or intentions for today.
+            self_care: Simple self-care or rest ideas the user mentioned or agreed to.
+            recap_summary: One-sentence recap of today’s check-in.
+
+        Returns:
+            A dict with the stored entry.
         """
 
         logger.info(
-            f"update_order called with: drinkType={drinkType}, size={size}, milk={milk}, extras={extras}, name={name}"
+            f"save_checkin called with mood={mood}, energy={energy}, "
+            f"stressors={stressors}, objectives={objectives}, self_care={self_care}"
         )
 
-        if drinkType is not None:
-            self.order_state.drinkType = drinkType
-
-        if size is not None:
-            self.order_state.size = size
-
-        if milk is not None:
-            self.order_state.milk = milk
-
-        if name is not None:
-            self.order_state.name = name
-
-        if extras is not None:
-            # overwrite for simplicity; could also merge/extend
-            self.order_state.extras = extras
-
-        current = self.order_state.to_dict()
-        missing = self.order_state.missing_fields()
-        logger.info(f"Current order state: {current}, missing: {missing}")
-
-        return {
-            "order": current,
-            "is_complete": self.order_state.is_complete(),
-            "missing_fields": missing,
-        }
-
-    @function_tool()
-    async def finalize_order(self, context: RunContext) -> dict[str, Any]:
-        """
-        Finalize the current order, save it to a JSON file, and return a summary.
-        Only call this when the order is complete.
-        """
-
-        if not self.order_state.is_complete():
-            missing = self.order_state.missing_fields()
-            logger.warning(
-                f"finalize_order called but order is incomplete. Missing: {missing}"
-            )
-            return {
-                "error": "Order is not complete yet",
-                "missing_fields": missing,
-            }
-
-        # Build a brief human-readable summary
-        summary = (
-            f"{self.order_state.size} {self.order_state.drinkType} "
-            f"with {self.order_state.milk} milk"
+        entry = append_entry(
+            mood=mood,
+            energy=energy,
+            stressors=stressors,
+            objectives=objectives,
+            self_care=self_care,
+            agent_summary=recap_summary,
+            base_dir=Path(__file__).resolve().parent.parent,
         )
-        if self.order_state.extras:
-            summary += f", extras: {', '.join(self.order_state.extras)}"
-        summary += f" for {self.order_state.name}"
-
-        logger.info(f"Final order summary: {summary}")
-
-        # Save only once per session to avoid duplicates
-        if not self._saved_once:
-            path = save_order_to_file(
-                self.order_state,
-                base_dir=Path(__file__).resolve().parent.parent,
-                summary=summary,  # <-- pass summary into JSON
-            )
-            self._saved_once = True
-            logger.info(f"Order saved to {path}")
-        else:
-            path = None
 
         return {
-            "order": self.order_state.to_dict(),
-            "saved_to": str(path) if path else None,
-            "summary": summary,
+            "stored": True,
+            "timestamp": entry.timestamp,
+            "mood": entry.mood,
+            "energy": entry.energy,
+            "stressors": entry.stressors,
+            "objectives": entry.objectives,
+            "self_care": entry.self_care,
+            "agent_summary": entry.agent_summary,
         }
 
 

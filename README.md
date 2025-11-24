@@ -28,6 +28,55 @@ The agent maintains the following structured order object:
   "name": "string"
 }
 ```
+# 🌿 Day 3 — Health & Wellness Voice Companion
+
+For Day 3 of the Murf AI Voice Agents Challenge, I transformed the project into a **daily health & wellness check-in companion**.  
+The agent now supports short, meaningful voice conversations focused on mood, energy, stressors, goals, and self-care — and remembers past check-ins.
+
+---
+
+## ✨ What the agent does
+
+✔ Conducts daily voice check-ins:  
+  - mood  
+  - energy level  
+  - current stressors (optional)  
+  - goals / intentions for the day (1–3 items)  
+  - self-care ideas (e.g., walk, rest, hobbies)
+
+✔ Offers **realistic and grounded suggestions**  
+  - no medical claims  
+  - no diagnosis  
+  - small, practical advice only
+
+✔ Ends with a **recap**  
+> “You’re feeling tired but want to finish your assignment and clean your room, and you’ll try to take a short walk. Does that sound right?”
+
+✔ **Tool call:** saves the check-in to file only after recap
+
+---
+
+## 🧠 Memory & Persistence
+
+A new log file now stores all previous check-ins:
+backend/wellness_log.json
+
+Each entry includes:
+
+```json
+{
+  "timestamp": "...",
+  "mood": "...",
+  "energy": "...",
+  "stressors": "...",
+  "objectives": ["..."],
+  "self_care": ["..."],
+  "agent_summary": "..."
+}
+```
+On every new session, the agent reads this file and gently references past entries:
+
+“Last time you mentioned low energy — how does today compare?”
 
 More updates will be pushed day by day.
 ---

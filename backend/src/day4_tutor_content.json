@@ -1,0 +1,32 @@
+[
+  {
+    "id": "variables",
+    "title": "Variables",
+    "summary": "Variables store values so you can reuse them later. You give them a name, assign a value, and then you can use that name throughout your program.",
+    "sample_question": "What is a variable and why is it useful when writing code?"
+  },
+  {
+    "id": "loops",
+    "title": "Loops",
+    "summary": "Loops let you repeat an action multiple times without rewriting the same code.",
+    "sample_question": "Explain the difference between a for loop and a while loop."
+  },
+  {
+    "id": "linked_lists",
+    "title": "Linked Lists",
+    "summary": "A linked list is a linear data structure where each node stores a value and a pointer to the next node.",
+    "sample_question": "What is a linked list, and when would you prefer it over an array?"
+  },
+  {
+    "id": "basic_ai",
+    "title": "Basic AI Concepts",
+    "summary": "Artificial Intelligence is about building systems that can perform tasks that typically require human intelligence.",
+    "sample_question": "In simple terms, what is Artificial Intelligence and where might you see it in everyday life?"
+  },
+  {
+    "id": "genai",
+    "title": "Generative AI",
+    "summary": "Generative AI refers to models that can create new content such as text, images, or code based on patterns learned from data.",
+    "sample_question": "What is Generative AI, and how is it different from traditional AI systems?"
+  }
+]

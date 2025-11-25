@@ -28,6 +28,42 @@ The agent maintains the following structured order object:
   "name": "string"
 }
 ```
+# 🚀 Day 4 — Teach-the-Tutor: Active Recall Voice Learning Agent
+
+For **Day 4 of the Murf AI Voice Agents Challenge**, the project evolved into an **active recall voice learning coach** — a smart tutor that helps users learn by *explaining concepts, quizzing them, and making them teach back*.
+
+> 📌 Research-backed principle:  
+> **You learn best when you teach.**  
+> This agent reinforces learning through explanation → recall → articulation.
+
+---
+
+## 🎯 Core Objectives Completed
+
+- Built a **voice-first learning experience**
+- Implemented **three learning modes**, switchable by voice at any time
+- Used **Murf Falcon TTS** with **different voice personas per mode**
+- Added **JSON-driven concept library**
+- Tracked **concept-level mastery and progress over time**
+
+---
+
+## 🧠 Learning Modes + Voice Personas
+
+| Mode | Purpose | Murf Falcon Voice | Personality |
+|------|---------|------------------|-------------|
+| `learn` | Agent explains the concept | **Matthew** | Calm & encouraging |
+| `quiz` | Agent asks questions to test understanding | **Alicia** | Energetic quiz master |
+| `teach_back` | User explains the concept back | **Ken** | Supportive coach, reflective |
+
+🔄 The user can switch modes *at any time* by simply speaking:
+> “Let’s switch to quiz mode”  
+> “Can I do teach-back now?”  
+> “I want to learn instead”
+
+Voice switching happens **dynamically in real time** without restarting the session.
+
+---
 
 More updates will be pushed day by day.
 ---

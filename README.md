@@ -1,40 +1,26 @@
-## 🌟 Parv – Day 1 Progress (Murf AI Voice Agent Challenge 2025)
+# 🚀 Day 5 — FAQ-Based SDR Voice Agent with Lead Capture
 
-- Successfully set up the backend and frontend
-- Able to start the voice agent locally
-- Tested voice → Gemini → Murf Falcon → playback loop
-- Everything is working 🎉
+For **Day 5 of the Murf AI Voice Agents Challenge**, I built a **Sales Development Representative (SDR) voice agent** for an Indian startup — **Razorpay**.
 
-# 🌟 Day 2 — Coffee Shop Barista Agent
+The agent can:
+- Answer common company, product, and pricing questions using a curated FAQ
+- Hold a focused discovery conversation like a real SDR
+- Capture key lead details naturally
+- Generate and store a structured end-of-call summary in JSON
 
-Day 2 goal: Convert the base voice agent into a **conversational barista** capable of taking a coffee order through voice.
-You can find Day-2 changes in the day-2 branch.
+This agent mirrors how early sales conversations actually happen in real SaaS companies.
 
-## 🚀 What was added in Day 2
+---
 
-### 🔹 Persona
-Friendly barista for **Nebula Coffee Co.**
-Warm, upbeat responses — feels like a real café experience.
+## 🎯 Primary Objective
 
-### 🔹 Order State Tracking
-The agent maintains the following structured order object:
+Build a **voice-based SDR agent** that:
+- Behaves like a representative of a specific company
+- Answers FAQ questions accurately (no hallucinations)
+- Collects lead information during the conversation
+- Saves the lead data at the end of the call
 
-```json
-{
-  "drinkType": "string",
-  "size": "string",
-  "milk": "string",
-  "extras": ["string"],
-  "name": "string"
-}
-```
-# 🚀 Day 4 — Teach-the-Tutor: Active Recall Voice Learning Agent
-
-For **Day 4 of the Murf AI Voice Agents Challenge**, the project evolved into an **active recall voice learning coach** — a smart tutor that helps users learn by *explaining concepts, quizzing them, and making them teach back*.
-
-> 📌 Research-backed principle:  
-> **You learn best when you teach.**  
-> This agent reinforces learning through explanation → recall → articulation.
+✅ All required Day-5 goals are completed.
 
 ---
 

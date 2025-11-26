@@ -22,35 +22,6 @@ Build a **voice-based SDR agent** that:
 
 ✅ All required Day-5 goals are completed.
 
----
-
-## 🎯 Core Objectives Completed
-
-- Built a **voice-first learning experience**
-- Implemented **three learning modes**, switchable by voice at any time
-- Used **Murf Falcon TTS** with **different voice personas per mode**
-- Added **JSON-driven concept library**
-- Tracked **concept-level mastery and progress over time**
-
----
-
-## 🧠 Learning Modes + Voice Personas
-
-| Mode | Purpose | Murf Falcon Voice | Personality |
-|------|---------|------------------|-------------|
-| `learn` | Agent explains the concept | **Matthew** | Calm & encouraging |
-| `quiz` | Agent asks questions to test understanding | **Alicia** | Energetic quiz master |
-| `teach_back` | User explains the concept back | **Ken** | Supportive coach, reflective |
-
-🔄 The user can switch modes *at any time* by simply speaking:
-> “Let’s switch to quiz mode”  
-> “Can I do teach-back now?”  
-> “I want to learn instead”
-
-Voice switching happens **dynamically in real time** without restarting the session.
-
----
-
 More updates will be pushed day by day.
 ---
 

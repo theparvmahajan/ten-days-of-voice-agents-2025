@@ -114,6 +114,30 @@ For **Day 4 of the Murf AI Voice Agents Challenge**, the project evolved into an
 Voice switching happens **dynamically in real time** without restarting the session.
 
 ---
+# 🚀 Day 5 — FAQ-Based SDR Voice Agent with Lead Capture
+
+For **Day 5 of the Murf AI Voice Agents Challenge**, I built a **Sales Development Representative (SDR) voice agent** for an Indian startup — **Razorpay**.
+
+The agent can:
+- Answer common company, product, and pricing questions using a curated FAQ
+- Hold a focused discovery conversation like a real SDR
+- Capture key lead details naturally
+- Generate and store a structured end-of-call summary in JSON
+
+This agent mirrors how early sales conversations actually happen in real SaaS companies.
+
+---
+
+## 🎯 Primary Objective
+
+Build a **voice-based SDR agent** that:
+- Behaves like a representative of a specific company
+- Answers FAQ questions accurately (no hallucinations)
+- Collects lead information during the conversation
+- Saves the lead data at the end of the call
+
+✅ All required Day-5 goals are completed.
+---
 
 More updates will be pushed day by day.
 ---

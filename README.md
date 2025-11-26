@@ -139,6 +139,32 @@ Build a **voice-based SDR agent** that:
 ✅ All required Day-5 goals are completed.
 ---
 
+# ⚠️ Day 6 — Fraud Alert Voice Agent (Demo Bank)
+
+For **Day 6 of the Murf AI Voice Agents Challenge**, I built a **fraud alert voice agent** for a fictional Indian bank (demo/sandbox only, using fake data).
+
+The agent simulates a call from the bank’s fraud department, walks through a suspicious transaction, verifies the customer safely, and updates the fraud case in a small database.
+
+---
+
+## 🎯 What This Agent Does
+
+- Acts as a **fraud detection representative** for a fictional bank  
+- Loads a **single fraud case** from a local database at call start  
+- Verifies the customer using **non-sensitive** information (no full card, no PIN, no password)  
+- Reads out a **suspicious transaction**:
+  - Merchant name  
+  - Amount  
+  - Masked card (e.g. `**** 4242`)  
+  - Timestamp  
+  - Location  
+- Asks the user:
+  > “Did you make this transaction, yes or no?”
+
+Based on the user’s answer, it updates the case status and explains next steps.
+
+---
+
 More updates will be pushed day by day.
 ---
 

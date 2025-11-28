@@ -1,27 +1,91 @@
-# ⚠️ Day 6 — Fraud Alert Voice Agent (Demo Bank)
+# 🛒 Day 7 — Food & Grocery Ordering Voice Agent
 
-For **Day 6 of the Murf AI Voice Agents Challenge**, I built a **fraud alert voice agent** for a fictional Indian bank (demo/sandbox only, using fake data).
+For **Day 7 of the Murf AI Voice Agents Challenge**, I built a **food & grocery ordering voice agent** for a fictional quick-commerce store.
 
-The agent simulates a call from the bank’s fraud department, walks through a suspicious transaction, verifies the customer safely, and updates the fraud case in a small database.
+The agent allows users to order groceries and prepared food via natural voice conversation, maintains a live cart, and places the order by saving it to a **database-backed order record**.
 
 ---
 
-## 🎯 What This Agent Does
+## 🎯 Primary Objective
 
-- Acts as a **fraud detection representative** for a fictional bank  
-- Loads a **single fraud case** from a local database at call start  
-- Verifies the customer using **non-sensitive** information (no full card, no PIN, no password)  
-- Reads out a **suspicious transaction**:
-  - Merchant name  
-  - Amount  
-  - Masked card (e.g. `**** 4242`)  
-  - Timestamp  
-  - Location  
-- Asks the user:
-  > “Did you make this transaction, yes or no?”
+Build a voice assistant that can:
+- Understand grocery and food orders
+- Maintain a cart across the conversation
+- Intelligently handle “ingredients for X” requests
+- Persist the final order when the user is done
 
-Based on the user’s answer, it updates the case status and explains next steps.
+✅ All Day-7 primary goals are completed using a database for persistence.
 
+---
+
+## 🗂 Catalog & Data
+
+- A structured **catalog** is stored in the database, covering:
+  - Groceries (bread, milk, eggs, etc.)
+  - Snacks
+  - Prepared foods
+- Each item includes:
+  - Name
+  - Category
+  - Price
+  - Optional attributes (size, tags, etc.)
+
+---
+
+## 🧠 Agent Capabilities
+
+### 🛍 Cart Management
+The agent can:
+- Add items with quantity
+- Remove items
+- Update quantities
+- List current cart contents
+- Verbally confirm every cart update
+
+### 🥪 Intelligent “Ingredients for X”
+The agent understands high-level requests such as:
+- “Ingredients for a peanut butter sandwich”
+- “What I need to cook pasta for two”
+
+It maps these requests to multiple catalog items and adds them together to the cart, confirming the action verbally.
+
+---
+
+## ✅ Order Placement & Persistence
+
+When the user says:
+- “That’s all”
+- “Place my order”
+- “I’m done”
+
+The agent:
+1. Confirms final cart contents and total
+2. Creates an order object with:
+   - Items & quantities
+   - Prices and total
+   - Timestamp
+3. Saves the order to the **database**
+4. Confirms that the order has been successfully placed
+
+---
+
+## 🧩 Tech Stack
+
+- LiveKit Agents (voice orchestration)
+- Murf Falcon (natural TTS)
+- LLM-based intent understanding
+- Database-backed catalog and orders
+
+---
+
+## ✅ Day 7 Status
+
+- Catalog creation ✅  
+- Cart management ✅  
+- Ingredient-based ordering ✅  
+- Order persistence in database ✅  
+
+✅ **Day 7 Primary Goal Completed**
 ---
 
 ## 🎯 Primary Objective

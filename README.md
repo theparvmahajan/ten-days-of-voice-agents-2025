@@ -164,6 +164,79 @@ The agent simulates a call from the bank’s fraud department, walks through a s
 Based on the user’s answer, it updates the case status and explains next steps.
 
 ---
+# 🛒 Day 7 — Food & Grocery Ordering Voice Agent
+
+For **Day 7 of the Murf AI Voice Agents Challenge**, I built a **food & grocery ordering voice agent** for a fictional quick-commerce store.
+
+The agent allows users to order groceries and prepared food via natural voice conversation, maintains a live cart, and places the order by saving it to a **database-backed order record**.
+
+---
+
+## 🎯 Primary Objective
+
+Build a voice assistant that can:
+- Understand grocery and food orders
+- Maintain a cart across the conversation
+- Intelligently handle “ingredients for X” requests
+- Persist the final order when the user is done
+
+✅ All Day-7 primary goals are completed using a database for persistence.
+
+---
+
+## 🗂 Catalog & Data
+
+- A structured **catalog** is stored in the database, covering:
+  - Groceries (bread, milk, eggs, etc.)
+  - Snacks
+  - Prepared foods
+- Each item includes:
+  - Name
+  - Category
+  - Price
+  - Optional attributes (size, tags, etc.)
+
+---
+
+## 🧠 Agent Capabilities
+
+### 🛍 Cart Management
+The agent can:
+- Add items with quantity
+- Remove items
+- Update quantities
+- List current cart contents
+- Verbally confirm every cart update
+
+### 🥪 Intelligent “Ingredients for X”
+The agent understands high-level requests such as:
+- “Ingredients for a peanut butter sandwich”
+- “What I need to cook pasta for two”
+
+It maps these requests to multiple catalog items and adds them together to the cart, confirming the action verbally.
+
+---
+
+## ✅ Order Placement & Persistence
+
+When the user says:
+- “That’s all”
+- “Place my order”
+- “I’m done”
+
+The agent:
+1. Confirms final cart contents and total
+2. Creates an order object with:
+   - Items & quantities
+   - Prices and total
+   - Timestamp
+3. Saves the order to the **database**
+4. Confirms that the order has been successfully placed
+
+--- 
+
+✅ **Day 7 Primary Goal Completed**
+
 
 More updates will be pushed day by day.
 ---

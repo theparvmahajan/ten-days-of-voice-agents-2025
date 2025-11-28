@@ -651,7 +651,7 @@ def prewarm(proc: JobProcess):
 async def entrypoint(ctx: JobContext):
     ctx.log_context_fields = {"room": ctx.room.name}
     logger.info("\n" + "🇮🇳" * 12)
-    logger.info("🚀 STARTING DR ABHISHEK SHOP (Indian Context + Auto-Tracking)")
+    logger.info("🚀 STARTING 7 ELEVEN SHOP (Indian Context + Auto-Tracking)")
 
     userdata = Userdata()
 

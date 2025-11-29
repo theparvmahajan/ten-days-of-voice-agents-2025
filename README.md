@@ -236,7 +236,104 @@ The agent:
 --- 
 
 ✅ **Day 7 Primary Goal Completed**
+---
 
+# 🧙 Day 8 – Voice Game Master (D&D-Style Adventure)
+
+## Overview
+For Day 8 of the **10 Days of AI Voice Agents** challenge, this project implements a **voice-only Dungeons & Dragons–style Game Master (GM)**.  
+The agent runs an interactive fantasy adventure using only conversation history and in-session state — no external UI or database required.
+
+The Game Master describes scenes, remembers player decisions, and guides the player through a complete **mini narrative arc**.
+
+---
+
+## 🎯 Objective
+Build a voice agent that:
+- Acts as a Game Master in a defined fictional universe
+- Drives a coherent interactive story
+- Maintains continuity across turns using session state
+- Completes a short adventure arc in a single playthrough
+
+---
+
+## 🌍 Game Setting
+- **Universe:** Low-magic coastal fantasy (village of Brinmere)
+- **Tone:** Mysterious, atmospheric, calm
+- **Role:** The agent narrates scenes and waits for the player’s decisions
+
+Each agent response **ends with a prompt for action**:  
+> *“What do you do?”*
+
+---
+
+## 🧠 Agent Capabilities
+- Scene narration with branching choices
+- Natural language player action parsing
+- Session memory:
+  - Previous actions
+  - Named locations
+  - Inventory items
+  - Journal entries
+- Mini-arc completion (discovery → conflict → resolution)
+- Full session reset option
+
+---
+
+## 🎮 Supported Player Actions
+- Explore locations  
+- Inspect objects  
+- Make moral or strategic choices  
+- Retry or restart the adventure  
+
+The agent resolves actions using:
+- Exact choice keywords  
+- Fuzzy matching on spoken phrases  
+- Clarifying prompts when input is ambiguous  
+
+---
+
+## 🛠️ Tools Implemented
+| Tool | Purpose |
+|-----|--------|
+| `start_adventure` | Start a new adventure session |
+| `get_scene` | Re-describe the current scene |
+| `player_action` | Process player decisions |
+| `show_journal` | Display remembered events and inventory |
+| `restart_adventure` | Reset session state |
+
+---
+
+## 🎤 Voice Pipeline
+- **STT:** Deepgram  
+- **LLM:** Google Gemini  
+- **TTS:** Murf Falcon  
+- **VAD:** Silero  
+- **Turn Detection:** LiveKit Multilingual Model  
+
+Designed for smooth back-and-forth storytelling with low latency.
+
+---
+
+## ✅ Completion Criteria (Met)
+- ✅ Clear GM persona and system prompt  
+- ✅ Interactive voice-only storytelling  
+- ✅ Session lasts 8–15 turns  
+- ✅ Mini-story arc is completed  
+- ✅ Player progress persists during the session  
+
+---
+
+## 📸 Recommended Demo Flow
+A typical walkthrough:
+1. Wake at the shoreline  
+2. Discover a mysterious clue  
+3. Explore a ruined watchtower  
+4. Encounter hidden danger  
+5. Recover an important artifact  
+6. Resolve the mini-arc  
+
+---
 
 More updates will be pushed day by day.
 ---

@@ -1,97 +1,108 @@
-# 🧙 Day 8 – Voice Game Master (D&D-Style Adventure)
+# Day 9 – Voice-Driven E-Commerce Agent (ACP-Inspired)
 
 ## Overview
-For Day 8 of the **10 Days of AI Voice Agents** challenge, this project implements a **voice-only Dungeons & Dragons–style Game Master (GM)**.  
-The agent runs an interactive fantasy adventure using only conversation history and in-session state — no external UI or database required.
 
-The Game Master describes scenes, remembers player decisions, and guides the player through a complete **mini narrative arc**.
+This project implements a **voice-driven E-commerce assistant** inspired by the **Agentic Commerce Protocol (ACP)**.  
+The agent allows users to browse a product catalog, add items to a cart, and place orders **using natural voice commands**.  
+All commerce logic is handled via structured Python functions, while conversation and voice handling are managed by the agent layer.
 
----
-
-## 🎯 Objective
-Build a voice agent that:
-- Acts as a Game Master in a defined fictional universe
-- Drives a coherent interactive story
-- Maintains continuity across turns using session state
-- Completes a short adventure arc in a single playthrough
+> ⚠️ Demo only — no real payments, authentication, or sensitive data involved.
 
 ---
 
-## 🌍 Game Setting
-- **Universe:** Low-magic coastal fantasy (village of Brinmere)
-- **Tone:** Mysterious, atmospheric, calm
-- **Role:** The agent narrates scenes and waits for the player’s decisions
+## Key Highlights
 
-Each agent response **ends with a prompt for action**:  
-> *“What do you do?”*
-
----
-
-## 🧠 Agent Capabilities
-- Scene narration with branching choices
-- Natural language player action parsing
-- Session memory:
-  - Previous actions
-  - Named locations
-  - Inventory items
-  - Journal entries
-- Mini-arc completion (discovery → conflict → resolution)
-- Full session reset option
+- 🎙 **Voice-first shopping experience**
+- 🧠 Clear separation of:
+  - **Conversation logic** (LLM + voice)
+  - **Commerce logic** (catalog, cart, orders)
+- 🛍 **ACP-inspired merchant layer**
+- 📦 Orders persisted to a JSON backend
+- 🎨 Clean **light-theme frontend UI** (no external icon libraries needed)
 
 ---
 
-## 🎮 Supported Player Actions
-- Explore locations  
-- Inspect objects  
-- Make moral or strategic choices  
-- Retry or restart the adventure  
+## Features Implemented
 
-The agent resolves actions using:
-- Exact choice keywords  
-- Fuzzy matching on spoken phrases  
-- Clarifying prompts when input is ambiguous  
+### 1. Product Catalog
+- Static catalog defined in Python
+- Each product includes:
+  - `id`
+  - `name`
+  - `description`
+  - `price`
+  - `currency`
+  - `category`
+  - optional attributes (color, size)
 
----
+### 2. Voice-Based Browsing
+Users can say things like:
+- “Show me black hoodies”
+- “Do you have mugs under 500 rupees?”
+- “I’m looking for a phone under 30,000”
 
-## 🛠️ Tools Implemented
-| Tool | Purpose |
-|-----|--------|
-| `start_adventure` | Start a new adventure session |
-| `get_scene` | Re-describe the current scene |
-| `player_action` | Process player decisions |
-| `show_journal` | Display remembered events and inventory |
-| `restart_adventure` | Reset session state |
-
----
-
-## 🎤 Voice Pipeline
-- **STT:** Deepgram  
-- **LLM:** Google Gemini  
-- **TTS:** Murf Falcon  
-- **VAD:** Silero  
-- **Turn Detection:** LiveKit Multilingual Model  
-
-Designed for smooth back-and-forth storytelling with low latency.
+The agent:
+- Interprets intent
+- Calls `list_products()` with filters
+- Reads back relevant items with prices and IDs
 
 ---
 
-## ✅ Completion Criteria (Met)
-- ✅ Clear GM persona and system prompt  
-- ✅ Interactive voice-only storytelling  
-- ✅ Session lasts 8–15 turns  
-- ✅ Mini-story arc is completed  
-- ✅ Player progress persists during the session  
+### 3. Cart Management
+- Add items by voice:
+  - “Add the second hoodie in size M”
+  - “Add mug-001, quantity two”
+- View cart:
+  - “What’s in my cart?”
+- Clear cart:
+  - “Clear my cart”
+
+Session-level cart state is maintained using `userdata`.
 
 ---
 
-## 📸 Recommended Demo Flow
-A typical walkthrough:
-1. Wake at the shoreline  
-2. Discover a mysterious clue  
-3. Explore a ruined watchtower  
-4. Encounter hidden danger  
-5. Recover an important artifact  
-6. Resolve the mini-arc  
+### 4. Order Placement
+- User triggers checkout via voice:
+  - “Place my order”
+- Agent:
+  - Summarizes items and total
+  - Calls `create_order_object()`
+  - Saves order to `orders.json`
+- Cart is cleared after successful order
+
+Each order includes:
+- Unique order ID
+- Items & quantities
+- Prices & currency
+- Timestamp
+
+---
+
+### 5. Order History
+- User can ask:
+  - “What did I just buy?”
+- Agent reads the most recent order from persistent storage
+
+---
+
+## Tech Stack
+
+### Backend
+- Python
+- LiveKit Agents SDK
+- Google Gemini (LLM)
+- Deepgram (STT)
+- Murf (TTS)
+- JSON file for persistence
+
+### Frontend
+- Next.js / React
+- Tailwind CSS
+- Custom light-theme UI
+
+---
+
+## Architecture is ACP-Inspired
 
 ---
 

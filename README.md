@@ -335,6 +335,97 @@ A typical walkthrough:
 
 ---
 
+# Day 9 – Voice-Driven E-Commerce Agent (ACP-Inspired)
+
+## Overview
+
+This project implements a **voice-driven E-commerce assistant** inspired by the **Agentic Commerce Protocol (ACP)**.  
+The agent allows users to browse a product catalog, add items to a cart, and place orders **using natural voice commands**.  
+All commerce logic is handled via structured Python functions, while conversation and voice handling are managed by the agent layer.
+
+> ⚠️ Demo only — no real payments, authentication, or sensitive data involved.
+
+---
+
+## Key Highlights
+
+- 🎙 **Voice-first shopping experience**
+- 🧠 Clear separation of:
+  - **Conversation logic** (LLM + voice)
+  - **Commerce logic** (catalog, cart, orders)
+- 🛍 **ACP-inspired merchant layer**
+- 📦 Orders persisted to a JSON backend
+- 🎨 Clean **light-theme frontend UI** (no external icon libraries needed)
+
+---
+
+## Features Implemented
+
+### 1. Product Catalog
+- Static catalog defined in Python
+- Each product includes:
+  - `id`
+  - `name`
+  - `description`
+  - `price`
+  - `currency`
+  - `category`
+  - optional attributes (color, size)
+
+### 2. Voice-Based Browsing
+Users can say things like:
+- “Show me black hoodies”
+- “Do you have mugs under 500 rupees?”
+- “I’m looking for a phone under 30,000”
+
+The agent:
+- Interprets intent
+- Calls `list_products()` with filters
+- Reads back relevant items with prices and IDs
+
+---
+
+### 3. Cart Management
+- Add items by voice:
+  - “Add the second hoodie in size M”
+  - “Add mug-001, quantity two”
+- View cart:
+  - “What’s in my cart?”
+- Clear cart:
+  - “Clear my cart”
+
+Session-level cart state is maintained using `userdata`.
+
+---
+
+### 4. Order Placement
+- User triggers checkout via voice:
+  - “Place my order”
+- Agent:
+  - Summarizes items and total
+  - Calls `create_order_object()`
+  - Saves order to `orders.json`
+- Cart is cleared after successful order
+
+Each order includes:
+- Unique order ID
+- Items & quantities
+- Prices & currency
+- Timestamp
+
+---
+
+### 5. Order History
+- User can ask:
+  - “What did I just buy?”
+- Agent reads the most recent order from persistent storage
+
+---
+
+## Architecture is ACP-Inspired
+
+---
+
 More updates will be pushed day by day.
 ---
 
